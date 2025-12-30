@@ -3,7 +3,7 @@
 
   var Defined = {
     api: 'lampac',
-    localhost: 'https://bwa.to/rc/',
+    localhost: 'https://bwa.to/rc',
     apn: ''
   };
 
@@ -28,7 +28,7 @@
   }
 }
 
-var hostkey = 'https://bwa.to/rc'.replace('http://', '').replace('https://', '');
+var hostkey = 'https://rc.bwa.to'.replace('http://', '').replace('https://', '');
 
 if (!window.rch_nws || !window.rch_nws[hostkey]) {
   if (!window.rch_nws) window.rch_nws = {};
@@ -53,7 +53,7 @@ window.rch_nws[hostkey].typeInvoke = function rchtypeInvoke(host, call) {
     if (Lampa.Platform.is('android') || Lampa.Platform.is('tizen')) check(true);
     else {
       var net = new Lampa.Reguest();
-      net.silent('https://bwa.to/rc/'.indexOf(location.host) >= 0 ? 'https://github.com/' : host + '/cors/check', function() {
+      net.silent('https://rc.bwa.to'.indexOf(location.host) >= 0 ? 'https://github.com/' : host + '/cors/check', function() {
         check(true);
       }, function() {
         check(false);
@@ -65,7 +65,7 @@ window.rch_nws[hostkey].typeInvoke = function rchtypeInvoke(host, call) {
 };
 
 window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection) {
-  window.rch_nws[hostkey].typeInvoke('https://bwa.to/rc', function() {
+  window.rch_nws[hostkey].typeInvoke('https://rc.bwa.to', function() {
 
     client.invoke("RchRegistry", JSON.stringify({
       version: 149,
@@ -76,7 +76,7 @@ window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection)
 	  account_email: Lampa.Storage.get('account_email', ''),
 	  unic_id: Lampa.Storage.get('lampac_unic_id', ''),
 	  profile_id: Lampa.Storage.get('lampac_profile_id', ''),
-	  token: 'js'
+	  token: 'sisi.js'
     }));
 
     if (client._shouldReconnect && window.rch_nws[hostkey].rchRegistry) {
@@ -115,7 +115,7 @@ window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection)
                 client.invoke("RchResult", rchId, html);
               } else {
                 $.ajax({
-                  url: 'https://rc.bwa.to/rch/gzresult?id=' + rchId,
+                  url: 'https://bwa.to/rc/rch/gzresult?id=' + rchId,
                   type: 'POST',
                   data: compressedArray,
                   async: true,
@@ -195,7 +195,7 @@ window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection)
 
   function rchRun(json, call) {
     if (typeof NativeWsClient == 'undefined') {
-      Lampa.Utils.putScript(["https://rc.bwa.to/js/nws-client-es5.js?v18112025"], function() {}, false, function() {
+      Lampa.Utils.putScript(["https://bwa.to/rc/js/nws-client-es5.js?v18112025"], function() {}, false, function() {
         rchInvoke(json, call);
       }, true);
     } else {
@@ -214,8 +214,8 @@ window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection)
       if (uid) url = Lampa.Utils.addUrlComponent(url, 'uid=' + encodeURIComponent(uid));
     }
     if (url.indexOf('token=') == -1) {
-      var token = 'js';
-      if (token != '') url = Lampa.Utils.addUrlComponent(url, 'token=js');
+      var token = 'sisi.js';
+      if (token != '') url = Lampa.Utils.addUrlComponent(url, 'token=sisi.js');
     }
     if (url.indexOf('nws_id=') == -1 && window.rch_nws && window.rch_nws[hostkey]) {
       var nws_id = window.rch_nws[hostkey].connectionId || Lampa.Storage.get('lampac_nws_id', '');
@@ -258,7 +258,7 @@ window.rch_nws[hostkey].Registry = function RchRegistry(client, startConnection)
 	
     if (balansers_with_search == undefined) {
       network.timeout(10000);
-      network.silent(account('https://rc.bwa.to/lite/withsearch'), function(json) {
+      network.silent(account('https://bwa.to/rc/lite/withsearch'), function(json) {
         balansers_with_search = json;
       }, function() {
 		  balansers_with_search = [];
@@ -790,7 +790,7 @@ else if (element.url) {
   if (false) {
     if (Platform.is('browser') && location.host.indexOf("127.0.0.1") !== -1) {
       Noty.show('Видео открыто в playerInner', {time: 3000});
-      $.get('https://rc.bwa.to/player-inner/' + element.url);
+      $.get('https://bwa.to/rc/player-inner/' + element.url);
       return;
     }
 
